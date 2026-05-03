@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> ULTAH DAFINA ARSY NORIN atau NANA! ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700;900&family=DynaPuff:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+
+        body {
+    /* Mengganti kursor utama jadi gambar bintang (SVG) */
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' style='font-size:24px;'><text y='50%'>✨</text></svg>"), auto;
+}
+
+button, .btn, a {
+    /* Saat menyentuh tombol, kursor ganti jadi bentuk hati */
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' style='font-size:24px;'><text y='50%'>💖</text></svg>"), pointer;
+}
+
+        /* Mencegah scroll yang tidak sengaja saat tombol lari */
+       html, body {
+      max-width: 100%;
+     overflow-x: hidden;
+      position: relative;
+    }  
+        :root {
+            --bg: #FDFCDC;
+            --primary: #F28482; /* Pink Merona */
+            --secondary: #84A59D; /* Hijau Kalem */
+            --accent: #F5CAC3; /* Peach Lucu */
+            --dark: #3D405B; /* Teks */
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Jost', sans-serif;
+            background-color: var(--bg);
+            color: var(--dark);
+            overflow-x: hidden;
+            display: flex; flex-direction: column; align-items: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Loading Screen Lucu */
+        #loading {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--dark); color: white;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 1000; transition: opacity 0.5s;
+            font-family: 'DynaPuff', cursive; font-size: 1.5rem;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 500px; width: 90%;
+            text-align: center;
+            padding: 40px 0;
+            display: none; /* Muncul setelah loading */
+        }
+
+        /* Header Area */
+        .header-box {
+            position: relative;
+            background: white;
+            padding: 30px 20px;
+            border-radius: 25px;
+            border: 5px solid var(--dark);
+            box-shadow: 8px 8px 0 var(--primary);
+            margin-bottom: 50px;
+        }
+
+        .waving-emoji {
+            font-size: 3rem;
+            display: inline-block;
+            animation: wave 1.5s infinite;
+        }
+
+        h1 {
+            font-family: 'DynaPuff', cursive;
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin: 10px 0;
+            text-shadow: 2px 2px 0 var(--dark);
+        }
+
+        .full-name {
+            font-size: 0.9rem; letter-spacing: 3px;
+            text-transform: uppercase; font-weight: 700;
+            background: var(--accent); padding: 5px 10px; border-radius: 10px;
+        }
+
+        /* Message Cards */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 3px solid var(--dark);
+            box-shadow: 5px 5px 0 var(--secondary);
+            text-align: left;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .card:hover { transform: translateY(-5px) rotate(-1deg); }
+
+        .card-tag {
+            position: absolute; top: -15px; left: 15px;
+            background: var(--dark); color: white;
+            padding: 5px 15px; border-radius: 20px;
+            font-weight: bold; font-size: 0.8rem;
+        }
+
+        .highlight {
+            background-color: var(--accent);
+            border-radius: 5px; padding: 0 3px;
+        }
+
+        /* Interactive Zone */
+        .interactive-zone {
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .btn {
+            font-family: 'DynaPuff', cursive;
+            background: var(--primary);
+            color: white;
+            border: 3px solid var(--dark);
+            padding: 15px 30px;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 0 var(--dark);
+            transition: all 0.1s;
+        }
+
+        .btn:active {
+            box-shadow: 0 2px 0 var(--dark);
+            transform: translateY(4px);
+        }
+
+        /* Tombol 'NGAJAK RIBUT' */
+        #runBtn {
+            position: absolute;
+            transition: 0.2s ease;
+            z-index: 10;
+        }
+
+        /* Floating Objects */
+        .floating {
+            position: fixed; font-size: 1.8rem; z-index: -1;
+            animation: floatUpDown 6s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes floatUpDown {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-100vh) rotate(180deg); }
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(20deg); }
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: auto; padding: 20px;
+            font-size: 0.8rem; opacity: 0.6;
+            width: 100%; text-align: center;
+        }
+
+        /* POPUP */
+        .overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(61, 64, 91, 0.9); z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+
+        #popup {
+            display: none; position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            background: var(--bg); border: 5px solid var(--dark);
+            padding: 30px; border-radius: 25px;
+            z-index: 101; width: 85%; max-width: 400px;
+            text-align: center; box-shadow: 10px 10px 0 rgba(0,0,0,0.2);
+            transition: 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+        }
+
+        #popup.show { display: block; transform: translate(-50%, -50%) scale(1); }
+
+        .cat-gif {
+            width: 100px; height: 100px;
+            background: #eee; border-radius: 50%;
+            margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;
+            font-size: 3rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- LOADING SCREEN -->
+    <div id="loading">
+        <div style="font-size: 3rem; animation: wave 0.5s infinite;">🎁</div>
+        <p>Bentar ya Nana, lagi bungkus kado...</p>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="container" id="mainContent">
+        <div class="header-box">
+            <div class="waving-emoji">👋</div>
+            <p style="margin: 0; font-weight: bold; opacity: 0.7;">Wih, ada yang ultah nih!</p>
+            <h1>NANA! 🎂</h1>
+            <span class="full-name">Dafina Arsy Norin</span>
+            <p style="margin-top: 10px; font-size: 0.9rem;">(Pasuruan, 4 Mei 2010 - <span class="highlight">Sekarang udah 16 thn!😎</span>)</p>
+        </div>
+
+        <div class="card">
+            <div class="card-tag">Testimoni Jujur</div>
+            <p>Jujur ya Na, kamu itu <span class="highlight">baik banget (pake banget!)</span> ke aku. Kadang aku mikir, kamu manusia apa malaikat kesasar di Pasuruan? 🤔 Tapi makasih ya udah se-<i>care</i> itu.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-tag">Doa Serius (Dikit aja)</div>
+            <p>Di umur yang ke-16 ini, semoga kamu: <br>
+               1. Tambah pinter (aamiin 🙏)<br>
+               2. semua cita-cita dan keinginanmu tercapai (kecuali yang berbahaya ya 😅)<br>
+               3. sehat selalu, biar bisa terus jadi Nana yang ceria!<br>
+               4. Gak gampang sambat 😋<br>
+               5. Tetap jadi Nana yang ceria & baik hati!<br>
+               Pokoknya yang terbaik buat kamu!</p>
+        </div>
+
+        <!-- AREA INTERAKTIF LUCU -->
+        <div class="interactive-zone">
+            <p style="margin-bottom: 15px; font-weight: bold;">Coba klik tombol di bawah buat liat kejutan:</p>
+            <button class="btn" id="runBtn" onmouseover="moveBtn()" onclick="finalSurprise()">Klik Aku Dong! ✨</button>
+            <div style="height: 100px;"></div> <!-- Placeholder biar tombol gak numpuk -->
+        </div>
+
+        <div class="footer">
+            Dibuat oleh seseorang yang mengagumi kebaikanmu.<br>
+            (Jangan ditarik, tombolnya emang jahil).
+        </div>
+    </div>
+
+    <!-- POPUP KEJUTAN AKHIR -->
+<div class="overlay" id="overlay"></div>
+<div id="popup">
+    <!-- KOTAK PEMBATAS GIF -->
+    <div style="width: 150px; margin: 0 auto 15px; overflow: hidden; border-radius: 15px;">
+        <div class="tenor-gif-embed" data-postid="461844679423238592" data-share-method="host" data-aspect-ratio="0.564257" data-width="100%">
+            <a href="https://tenor.com/view/cat-memes-happy-cat-memes-cat-gif-461844679423238592">Cat Memes Happy Cat Sticker</a>
+        </div>
+    </div>
+
+    <h3 style="font-family: 'DynaPuff', cursive; color: var(--primary);">Hahaha Kena Deh!</h3>
+    <p>"Terima kasih udah jadi orang baik. Serius, kebaikanmu itu berarti banget buat aku. selamat ultah ya, Nana! 🌸"</p>
+    <button class="btn" style="font-size: 1rem; padding: 10px 20px;" onclick="closeSurprise()">Oke, Sama-sama! 😊</button>
+</div>
+
+<!-- Script Tenor (Cukup pasang satu saja di paling bawah sebelum </body>) -->
+<script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+
+    <script>
+// 1. LOADING SCREEN SIMULATION
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loading').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('mainContent').style.display = 'block';
+                    startFloating();
+                }, 500);
+            }, 2000); // Loading selama 2 detik
+        });
+
+        // 2. FLOATING OBJECTS (EGG & HEART)
+        function startFloating() {
+            const icons = ['✨', '💖', '🧸', '🍭', '⭐', '🌸', '☁️'];
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const f = document.createElement('div');
+                    f.className = 'floating';
+                    f.innerText = icons[Math.floor(Math.random() * icons.length)];
+                    f.style.left = Math.random() * 100 + 'vw';
+                    f.style.bottom = '-50px';
+                    f.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                    f.style.fontSize = (Math.random() * 1 + 1.5) + 'rem';
+                    document.body.appendChild(f);
+                }, i * 300);
+            }
+        }
+
+        // 3. TOMBOL JAHIL (BISA LARI)
+        let clickCount = 0;
+        const runBtn = document.getElementById('runBtn');
+
+        function moveBtn() {
+    if (clickCount < 6) {
+        // Ambil ukuran tombol agar tidak terpotong di pinggir
+        const btnWidth = runBtn.offsetWidth;
+        const btnHeight = runBtn.offsetHeight;
+
+        // Batasi area lari agar tetap di dalam layar (padding 20px)
+        const maxX = window.innerWidth - btnWidth - 20;
+        const maxY = window.innerHeight - btnHeight - 20;
+
+        // Hitung posisi random yang aman
+        const randomX = Math.max(20, Math.floor(Math.random() * maxX));
+        const randomY = Math.max(20, Math.floor(Math.random() * maxY));
+
+        // Ubah ke fixed supaya dia bebas lari di seluruh layar tanpa kegeser scroll
+        runBtn.style.position = 'fixed'; 
+        runBtn.style.left = randomX + 'px';
+        runBtn.style.top = randomY + 'px';
+        
+        runBtn.innerText = "Eitss! 😎";
+        clickCount++;
+    } else {
+        // Balikin ke normal kalau sudah capek
+        runBtn.innerText = "OKE, CAPEK. KLIK AJA 😫";
+        runBtn.style.position = 'static';
+        runBtn.style.margin = '20px auto'; // Biar tetep di tengah
+        runBtn.style.background = '#84A59D';
+    }
+}
+
+        // 4. FINAL SURPRISE
+        function finalSurprise() {
+            if (clickCount >= 4 || window.innerWidth < 600) { // Di HP mungkin susah ngejar, jadi bolehin klik
+                document.getElementById('popup').classList.add('show');
+                document.getElementById('overlay').style.display = 'block';
+                setupConfetti();
+            } else {
+                moveBtn(); // Kalau maksa klik pas lagi lari
+            }
+        }
+
+        function closeSurprise() {
+            document.getElementById('popup').classList.remove('show');
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        // Sederhana efek konfeti
+        function setupConfetti() {
+            for(let i=0; i<50; i++) {
+                const confetto = document.createElement('div');
+                confetto.className = 'floating';
+                confetto.innerText = '🎉';
+                confetto.style.left = Math.random() * 100 + 'vw';
+                confetto.style.bottom = '-50px';
+                confetto.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(confetto);
+                setTimeout(() => confetto.remove(), 3000);
+            }
+        }
+    </script>
+</body>
+</html>
